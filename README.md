@@ -4,7 +4,7 @@ Secure & lightweight emails breaches monitor.
 ## Installation
 Github:
 ```
-git clone https://github.com/hanaui-git/emot
+git clone https://github.com/cspi-git/emot
 ```
 
 NpmJS:
@@ -29,4 +29,4 @@ optional arguments:
 Be sure to change the **serverURL** in index.js & the admin key in key.txt if necessary.
 
 ## License
-MIT © Hanaui
+MIT © CSPI
