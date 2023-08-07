@@ -16,7 +16,6 @@
     
     const adminKey = fs.readFileSync("./key.txt", "utf8")
     const parser = new ArgumentParser()
-    
     var args;
     
     // Startup
@@ -42,11 +41,9 @@
         })
     
         response = JSON.parse(response.body)
-
         response.data = JSON.parse(simpleAES256.decrypt(secret, Buffer.from(response.data, "hex")).toString())
 
         if(!response.data.length) return console.log("No emails found.")
-    
         table.setHeading("Index", "Email", "Breaches Found", "Created Date")
 
         for( const email in response.data ) table.addRow(email, response.data[email].email, response.data[email].breaches.length, response.data[email].createdDate)
@@ -61,12 +58,7 @@
         })
 
         response = JSON.parse(response.body)
-
-        if(response.data){
-            console.log("Email successfully added.")
-        }else{
-            console.log("Email already exists/Invalid email.")
-        }
+        response.data ? console.log("Email successfully added.") : console.log("Email already exists/Invalid email.")
     }else if(args.delete){
         var response = await request(`${emot.serverURL}delete`, {
             method: "DELETE",
@@ -77,12 +69,7 @@
         })
 
         response = JSON.parse(response.body)
-
-        if(response.data){
-            console.log("Email successfully deleted.")
-        }else{
-            console.log("Email does not exists/Invalid email.")
-        }
+        response.data ?console.log("Email successfully deleted.") : console.log("Email does not exists/Invalid email.")
     }else{
         console.log("Please use at least 1 argument.")
     }
